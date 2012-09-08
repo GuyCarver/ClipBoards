@@ -1,0 +1,49 @@
+[
+	{ "keys": ["shift+delete"], "command": "clip_cut" },
+	{ "keys": ["ctrl+x"], "command": "clip_cut" },
+	{ "keys": ["keypad_minus"], "command": "clip_cut" },
+	{ "keys": ["ctrl+insert"], "command": "clip_copy" },
+	{ "keys": ["keypad_plus"], "command": "clip_copy" },
+	{ "keys": ["ctrl+c"], "command": "clip_copy" },
+	{ "keys": ["alt+c"], "command": "columnselect" },
+	{ "keys": ["alt+l"], "command": "lineselect" },
+	{ "keys": ["ctrl+keypad_plus"], "command": "append_clipboard", "args": {"cmd": "copy"} },
+	{ "keys": ["ctrl+keypad_minus"], "command": "append_clipboard", "args": {"cmd": "cut"} },
+	{ "keys": ["ctrl+1"], "command": "set_clipboard", "args": {"buffer": 1} },
+	{ "keys": ["ctrl+2"], "command": "set_clipboard", "args": {"buffer": 2} },
+	{ "keys": ["ctrl+3"], "command": "set_clipboard", "args": {"buffer": 3} },
+	{ "keys": ["ctrl+4"], "command": "set_clipboard", "args": {"buffer": 4} },
+	{ "keys": ["ctrl+5"], "command": "set_clipboard", "args": {"buffer": 5} },
+	{ "keys": ["ctrl+6"], "command": "set_clipboard", "args": {"buffer": 6} },
+	{ "keys": ["ctrl+shift+1"], "command": "paste_clipboard", "args": {"buffer": 1} },
+	{ "keys": ["ctrl+shift+2"], "command": "paste_clipboard", "args": {"buffer": 2} },
+	{ "keys": ["ctrl+shift+3"], "command": "paste_clipboard", "args": {"buffer": 3} },
+	{ "keys": ["ctrl+shift+4"], "command": "paste_clipboard", "args": {"buffer": 4, "restore": true} },
+	{ "keys": ["ctrl+shift+5"], "command": "paste_clipboard", "args": {"buffer": 5, "restore": true} },
+	{ "keys": ["ctrl+shift+6"], "command": "paste_clipboard", "args": {"buffer": 6, "restore": true} },
+	{ "keys": ["up"], "command": "select_lines", "args": {"forward": false}, "context":
+		[
+			{ "key": "SelectionState.column", "operator": "equal", "operand": true }
+		]
+	},
+	{ "keys": ["down"], "command": "select_lines", "args": {"forward": true}, "context":
+		[
+			{ "key": "SelectionState.column", "operator": "equal", "operand": true }
+		]
+	},
+	{ "keys": ["up"], "command": "move", "args": {"by": "lines", "forward": false, "extend": true}, "context":
+		[
+			{ "key": "SelectionState.line", "operator": "equal", "operand": true }
+		]
+	},
+	{ "keys": ["down"], "command": "expand_selection", "args": {"to": "line"}, "context":
+		[
+			{ "key": "SelectionState.line", "operator": "equal", "operand": true }
+		]
+	},
+	{ "keys": ["alt+shift+c"], "command": "single_selection", "context":
+		[
+			{ "key": "num_selections", "operator": "not_equal", "operand": 1 }
+		]
+	}
+]

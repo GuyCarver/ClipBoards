@@ -1,0 +1,21 @@
+[
+	{ "keys": ["insert"], "command": "paste" },
+	{ "keys": ["keypad_divide"], "command": "paste" },
+	{ "keys": ["keypad_multiply"], "command": "paste_and_indent" },
+	{ "keys": ["keypad_minus"], "command": "cut" },
+	{ "keys": ["keypad_plus"], "command": "copy" },
+	{ "keys": ["super+keypad_plus"], "command": "append_clipboard", "args": {"cmd": "copy"} },
+	{ "keys": ["super+keypad_minus"], "command": "append_clipboard", "args": {"cmd": "cut"} },
+	{ "keys": ["super+1"], "command": "set_clipboard", "args": {"buffer": 1} },
+	{ "keys": ["super+2"], "command": "set_clipboard", "args": {"buffer": 2} },
+	{ "keys": ["super+3"], "command": "set_clipboard", "args": {"buffer": 3} },
+	{ "keys": ["super+4"], "command": "set_clipboard", "args": {"buffer": 4} },
+	{ "keys": ["super+5"], "command": "set_clipboard", "args": {"buffer": 5} },
+	{ "keys": ["super+6"], "command": "set_clipboard", "args": {"buffer": 6} },
+	{ "keys": ["super+shift+1"], "command": "paste_clipboard", "args": {"buffer": 1} },
+	{ "keys": ["super+shift+2"], "command": "paste_clipboard", "args": {"buffer": 2} },
+	{ "keys": ["super+shift+3"], "command": "paste_clipboard", "args": {"buffer": 3} },
+	{ "keys": ["super+shift+4"], "command": "paste_clipboard", "args": {"buffer": 4, "restore": true} },
+	{ "keys": ["super+shift+5"], "command": "paste_clipboard", "args": {"buffer": 5, "restore": true} },
+	{ "keys": ["super+shift+6"], "command": "paste_clipboard", "args": {"buffer": 6, "restore": true} }
+]
