@@ -7,19 +7,13 @@ selectionState = 0
 class ColumnselectCommand( sublime_plugin.TextCommand ) :
   def run( self, edit ) :
     global selectionState
-    if selectionState <> 0 :
-      selectionState = 0
-    else:
-      selectionState = 1
+    selectionState = 0 if selectionState <> 0 else 1
 
 class LineselectCommand( sublime_plugin.TextCommand ) :
   def run( self, edit ) :
     global selectionState
-    if selectionState <> 0 :
-      selectionState = 0
-    else:
-      selectionState = 2
-
+    selectionState = 0 if selectionState <> 0 else 2
+    
 class SelectionState( sublime_plugin.EventListener ) :
   def on_query_context(self, view, key, operator, operand, match_all):
     if key == "SelectionState.column" :
