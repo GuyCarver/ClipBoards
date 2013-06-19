@@ -1,4 +1,4 @@
-# Sublime Text 2 Clipboards Package adding multiple clipboards.
+# Sublime Text Clipboards Package adding multiple clipboards.
 
 ## Install
 

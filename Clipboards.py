@@ -1,18 +1,16 @@
 import sublime, sublime_plugin
 
-Clipboard_settings = sublime.load_settings("Clipboards.sublime-settings")
-
 selectionState = 0
 
 class ColumnselectCommand( sublime_plugin.TextCommand ) :
   def run( self, edit ) :
     global selectionState
-    selectionState = 0 if selectionState <> 0 else 1
+    selectionState = 0 if selectionState != 0 else 1
 
 class LineselectCommand( sublime_plugin.TextCommand ) :
   def run( self, edit ) :
     global selectionState
-    selectionState = 0 if selectionState <> 0 else 2
+    selectionState = 0 if selectionState != 0 else 2
     
 class SelectionState( sublime_plugin.EventListener ) :
   def on_query_context(self, view, key, operator, operand, match_all):
@@ -30,7 +28,12 @@ def ClearState( aView ) :
 class Clipboards :
   def __init__( self ) :
     self.Current = 1
-    self.Clipboards = [""] * Clipboard_settings.get("clipboards", 7)
+    self.LoadSettings()
+
+  def LoadSettings( self ) :
+    self.Clipboard_settings = sublime.load_settings("Clipboards.sublime-settings")    
+    self.Clipboards = [""] * int(self.Clipboard_settings.get("clipboards", 7))
+    # print(self.Clipboards)
 
   def Push( self ) :
     self.Clipboards[self.Current] = sublime.get_clipboard()
@@ -41,7 +44,7 @@ class Clipboards :
   def Set( self, Clip ) :
     prev = self.Current
 
-    if (Clip <> self.Current) and (Clip < len(self.Clipboards)) :
+    if (Clip != self.Current) and (Clip < len(self.Clipboards)) :
       try:
         self.Push()
       except:
@@ -49,26 +52,26 @@ class Clipboards :
 
       self.Current = Clip
       self.Pull()
-#      print self.Clipboards[self.Current]
+#      print(self.Clipboards[self.Current])
 
     return prev
 
   def Restore( self, Clip ) :
-    if (Clip <> self.Current) and (Clip < len(self.Clipboards)) :
+    if (Clip != self.Current) and (Clip < len(self.Clipboards)) :
       self.Current = Clip
       self.Pull()
 
   def Append( self ) :
     cb = sublime.get_clipboard()
-#    print "before" + self.Clipboards[self.Current]
+#    print("before " + self.Clipboards[self.Current])
     self.Clipboards[self.Current] = self.Clipboards[self.Current] + cb
     sublime.set_clipboard(self.Clipboards[self.Current])
-#    print "after" + self.Clipboards[self.Current]
+#    print("after " + self.Clipboards[self.Current])
 
   def GetCurrent( self ) :
     return self.Current
 
-Clips = Clipboards()
+Clips = None
 
 class SetClipboardCommand( sublime_plugin.TextCommand ) :
   def run( self, edit, buffer ) :
@@ -97,3 +100,7 @@ class ClipCopyCommand( sublime_plugin.TextCommand ) :
   def run( self, edit ) :
     self.view.run_command("copy")
     ClearState(self.view)
+
+def plugin_loaded(  ) :
+  global Clips
+  Clips = Clipboards()
