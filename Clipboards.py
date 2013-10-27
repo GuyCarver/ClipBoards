@@ -11,7 +11,7 @@ class LineselectCommand( sublime_plugin.TextCommand ) :
   def run( self, edit ) :
     global selectionState
     selectionState = 0 if selectionState != 0 else 2
-    
+
 class SelectionState( sublime_plugin.EventListener ) :
   def on_query_context(self, view, key, operator, operand, match_all):
     if key == "SelectionState.column" :
@@ -31,7 +31,7 @@ class Clipboards :
     self.LoadSettings()
 
   def LoadSettings( self ) :
-    self.Clipboard_settings = sublime.load_settings("Clipboards.sublime-settings")    
+    self.Clipboard_settings = sublime.load_settings("Clipboards.sublime-settings")
     self.Clipboards = [""] * int(self.Clipboard_settings.get("clipboards", 7))
     # print(self.Clipboards)
 
@@ -100,6 +100,19 @@ class ClipCopyCommand( sublime_plugin.TextCommand ) :
   def run( self, edit ) :
     self.view.run_command("copy")
     ClearState(self.view)
+
+class PasteAndSelectCommand( sublime_plugin.TextCommand ) :
+  def run( self, edit ) :
+    it = sublime.get_clipboard()
+    rA = []
+    if len(it) :
+      vw = self.view
+      for s in vw.sel() :
+        chrs = vw.insert(edit, s.a, it)
+        rA.append(sublime.Region(s.a, s.a + chrs))
+
+      for r in rA :
+        vw.sel().add(r)
 
 def plugin_loaded(  ) :
   global Clips

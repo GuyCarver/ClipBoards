@@ -5,6 +5,7 @@
 	{ "keys": ["ctrl+c"], "command": "clip_copy" },
 	{ "keys": ["alt+c"], "command": "columnselect" },
 	{ "keys": ["insert"], "command": "paste" },
+	{ "keys": ["shift+insert"], "command": "paste_and_select" },
 	{ "keys": ["ctrl+insert"], "command": "paste_and_indent" },
 	{ "keys": ["alt+l"], "command": "lineselect" },
 	{ "keys": ["ctrl+keypad_plus"], "command": "append_clipboard", "args": {"cmd": "copy"} },
